@@ -5,6 +5,9 @@ Homebrew formulae for [LibreDB](https://github.com/libredb) products.
 ## Usage
 
 ```bash
+# One-time: Homebrew's untrusted-tap policy requires trusting third-party taps
+brew trust libredb/tap
+
 brew tap libredb/tap
 brew install libredb-studio
 brew services start libredb-studio
