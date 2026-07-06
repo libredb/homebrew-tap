@@ -11,7 +11,7 @@
 class LibredbStudio < Formula
   desc "Web-based SQL IDE for Postgres, MySQL, SQLite, Oracle, MSSQL, MongoDB, Redis"
   homepage "https://github.com/libredb/libredb-studio"
-  version "0.9.44"
+  version "0.9.46"
   license "MIT"
 
   # The standalone payload runs under Node and ships a better-sqlite3 native
@@ -24,23 +24,23 @@ class LibredbStudio < Formula
 
   on_macos do
     on_intel do
-      url "https://github.com/libredb/libredb-studio/releases/download/0.9.44/libredb-studio-standalone-0.9.44-darwin-x64.tar.gz"
-      sha256 "b2582b99bd8744679bf1d7f8e9082a452858eeb0bab365425354227a2719b445"
+      url "https://github.com/libredb/libredb-studio/releases/download/0.9.46/libredb-studio-standalone-0.9.46-darwin-x64.tar.gz"
+      sha256 "3ff1cf05d62fee5bdeb103052eb37564ea2c02edf27d6737aaa9edf3e5bb0702"
     end
     on_arm do
-      url "https://github.com/libredb/libredb-studio/releases/download/0.9.44/libredb-studio-standalone-0.9.44-darwin-arm64.tar.gz"
-      sha256 "a4c849858bd2d9d1dafc76fe3ac1021870b3ac92cfbd2d630d2ca6b1ca087ffd"
+      url "https://github.com/libredb/libredb-studio/releases/download/0.9.46/libredb-studio-standalone-0.9.46-darwin-arm64.tar.gz"
+      sha256 "dfc99f4416b6b580a2fc04e45fe1d7f94ce5019b7123ddbae56ad66cdf122782"
     end
   end
 
   on_linux do
     on_intel do
-      url "https://github.com/libredb/libredb-studio/releases/download/0.9.44/libredb-studio-standalone-0.9.44-linux-x64.tar.gz"
-      sha256 "b06a0d655092a060cd9abb643262a5eee039d9a35f9954f08a9dec0becffbd96"
+      url "https://github.com/libredb/libredb-studio/releases/download/0.9.46/libredb-studio-standalone-0.9.46-linux-x64.tar.gz"
+      sha256 "4c22e5be68d3fed03c1a656ba199be7f1d6e92d58e87bd9d19ab6a96f63fc6bd"
     end
     on_arm do
-      url "https://github.com/libredb/libredb-studio/releases/download/0.9.44/libredb-studio-standalone-0.9.44-linux-arm64.tar.gz"
-      sha256 "2fe635fa4539864c45e5190e3c61879ed8b8f51757970e07eb43b7cf1af63d5c"
+      url "https://github.com/libredb/libredb-studio/releases/download/0.9.46/libredb-studio-standalone-0.9.46-linux-arm64.tar.gz"
+      sha256 "8ead6507b5e2300c032831a9edc7b26abffbdea61b4c6cb9b114ec8061a30471"
     end
   end
 
