@@ -11,7 +11,7 @@
 class LibredbStudio < Formula
   desc "Web-based SQL IDE for Postgres, MySQL, SQLite, Oracle, MSSQL, MongoDB, Redis"
   homepage "https://github.com/libredb/libredb-studio"
-  version "0.9.50"
+  version "0.9.51"
   license "MIT"
 
   # The standalone payload runs under Node and ships a better-sqlite3 native
@@ -24,38 +24,58 @@ class LibredbStudio < Formula
 
   on_macos do
     on_intel do
-      url "https://github.com/libredb/libredb-studio/releases/download/0.9.50/libredb-studio-standalone-0.9.50-darwin-x64.tar.gz"
-      sha256 "dd13cf55141ecb102e893690e0a5531ccec470ac71e3ec7bba1dff7939842318"
+      url "https://github.com/libredb/libredb-studio/releases/download/0.9.51/libredb-studio-standalone-0.9.51-darwin-x64.tar.gz"
+      sha256 "9a790cdae8387f8810d41338f2fd373562d95ca559875f00ed5e493fce006ff3"
     end
     on_arm do
-      url "https://github.com/libredb/libredb-studio/releases/download/0.9.50/libredb-studio-standalone-0.9.50-darwin-arm64.tar.gz"
-      sha256 "c0cd656bdd5b44235aa20c6ec4c375a33be9bd7532cfa34fda5013be9bcf5dc1"
+      url "https://github.com/libredb/libredb-studio/releases/download/0.9.51/libredb-studio-standalone-0.9.51-darwin-arm64.tar.gz"
+      sha256 "7f79c19a6acb1dbd5d246ec4a8b4120756b9e6230453e5cde5fd3c0c130fef73"
     end
   end
 
   on_linux do
     on_intel do
-      url "https://github.com/libredb/libredb-studio/releases/download/0.9.50/libredb-studio-standalone-0.9.50-linux-x64.tar.gz"
-      sha256 "9d698f6e36f925c1f384da02b8fd3dc70e9c7e3d3afe2c7dbe1b92074feb9d69"
+      url "https://github.com/libredb/libredb-studio/releases/download/0.9.51/libredb-studio-standalone-0.9.51-linux-x64.tar.gz"
+      sha256 "aa1bab67b7f8e71edbac4ce1641c4f6562bab4ad3e8c3ea25004b5e73112b419"
     end
     on_arm do
-      url "https://github.com/libredb/libredb-studio/releases/download/0.9.50/libredb-studio-standalone-0.9.50-linux-arm64.tar.gz"
-      sha256 "97f57918e8205002114b49ac6f9a8e687a08460d556631326c8f8c683fcea85f"
+      url "https://github.com/libredb/libredb-studio/releases/download/0.9.51/libredb-studio-standalone-0.9.51-linux-arm64.tar.gz"
+      sha256 "a924aa89b4eae2e1ab9090cec8a179f1a64c0ef44be9fc8eba9ef3471d093beb"
     end
   end
 
   def install
-    # The tarball is the standalone server payload with server.js at its root
-    # (no top-level directory), so install everything - including the hidden
-    # .next directory - into libexec.
+    # The tarball is rooted under a top-level libredb-studio-<version>/
+    # directory (issue #133); Homebrew strips that single top-level
+    # directory automatically for the formula's main url/sha256 download,
+    # so server.js and friends land directly in the staged working
+    # directory. Install everything - including the hidden .next
+    # directory - into libexec.
     libexec.install Dir["*", ".next"]
 
     # Launcher: run the standalone server under Homebrew's node@24, passing
-    # the caller's environment through untouched. All configuration is
-    # environment-driven; the zero-config first run generates missing auth
+    # the caller's environment through otherwise untouched. All configuration
+    # is environment-driven; the zero-config first run generates missing auth
     # secrets and prints the admin password once.
     (bin/"libredb-studio").write <<~SCRIPT
       #!/bin/bash
+      # Local-first bind (issue #134): default to loopback on a direct run,
+      # regardless of any inherited HOSTNAME (empty, or - e.g. under Docker -
+      # a container ID that Next.js would otherwise bind to); LIBREDB_BIND
+      # opts in to a different bind address. The `brew services` block below
+      # already passes HOSTNAME=127.0.0.1, so this resolves to the same
+      # default there too.
+      export HOSTNAME="${LIBREDB_BIND:-127.0.0.1}"
+      # Local-first state (issue #135): server.js chdirs into the payload
+      # (libexec) before resolving its default `./data`, so a direct run with
+      # no STORAGE_SQLITE_PATH would persist the zero-config
+      # auth-bootstrap.json (and any STORAGE_PROVIDER=sqlite data) inside the
+      # versioned keg - wiped on every `brew upgrade`. Default to the same
+      # path the `service` block below already uses, so state survives
+      # upgrades and both run modes share one install.
+      if [ -z "${STORAGE_SQLITE_PATH:-}" ]; then
+        export STORAGE_SQLITE_PATH="#{var}/libredb-studio/libredb-storage.db"
+      fi
       exec "#{Formula["node@24"].opt_bin}/node" "#{libexec}/server.js" "$@"
     SCRIPT
     (bin/"libredb-studio").chmod 0755
@@ -75,7 +95,7 @@ class LibredbStudio < Formula
     keep_alive false
     working_dir var
     # HOSTNAME keeps the service loopback-only (local-first); run the binary
-    # manually with HOSTNAME=0.0.0.0 or use a reverse proxy to expose it.
+    # manually with LIBREDB_BIND=0.0.0.0 or use a reverse proxy to expose it.
     environment_variables STORAGE_PROVIDER: "sqlite",
                           STORAGE_SQLITE_PATH: var/"libredb-studio/libredb-storage.db",
                           HOSTNAME: "127.0.0.1"
