@@ -25,22 +25,22 @@ class LibredbStudio < Formula
   on_macos do
     on_intel do
       url "https://github.com/libredb/libredb-studio/releases/download/0.9.55/libredb-studio-standalone-0.9.55-darwin-x64.tar.gz"
-      sha256 "fa5a707de69fb12a1d4f19f7f3ae288cb4e6159867603821efe13830ad9bcfd1"
+      sha256 "cc217f51d8d220654b2d27d272cce6ba4cdabcf551695dbaa00853ae3af0a4d9"
     end
     on_arm do
       url "https://github.com/libredb/libredb-studio/releases/download/0.9.55/libredb-studio-standalone-0.9.55-darwin-arm64.tar.gz"
-      sha256 "e3af121696ae8c5f8859a3087465b0860513d0190f36766327b3177065b51c23"
+      sha256 "d4d6170381432b87f3d3274e751363025f3ab2c0fbb31d06aeb8cb8645372713"
     end
   end
 
   on_linux do
     on_intel do
       url "https://github.com/libredb/libredb-studio/releases/download/0.9.55/libredb-studio-standalone-0.9.55-linux-x64.tar.gz"
-      sha256 "c157f0f878cbdec6398831136ef038564d0913c93a196fcd148efab6c3576f68"
+      sha256 "241e413cea8f3cc209b6a256c55ee8fa8e525300289c1fa0becee9b096cd00a1"
     end
     on_arm do
       url "https://github.com/libredb/libredb-studio/releases/download/0.9.55/libredb-studio-standalone-0.9.55-linux-arm64.tar.gz"
-      sha256 "e1eb6ed4d98d2d72bdcd8b9370c64977b08f033be1700d19d56ec3ca90074e32"
+      sha256 "f95629a163f6417b635f839525907dcbe77f78f7a74193c8b0b68381b5bd7e9c"
     end
   end
 
