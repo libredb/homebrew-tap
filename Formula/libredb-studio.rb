@@ -15,7 +15,7 @@ class LibredbStudio < Formula
   # characters, forbids a leading article and forbids the formula name.
   desc "Web-based SQL IDE for SQL, NoSQL, analytics and search engines"
   homepage "https://github.com/libredb/libredb-studio"
-  version "0.18.2"
+  version "0.18.3"
   license "MIT"
 
   # The standalone payload runs under Node and ships a better-sqlite3 native
@@ -28,23 +28,23 @@ class LibredbStudio < Formula
 
   on_macos do
     on_intel do
-      url "https://github.com/libredb/libredb-studio/releases/download/0.18.2/libredb-studio-standalone-0.18.2-darwin-x64.tar.gz"
-      sha256 "b84d2f1a488b982adea44d53f8eae78a680778524b648b48bf461e368fa6db58"
+      url "https://github.com/libredb/libredb-studio/releases/download/0.18.3/libredb-studio-standalone-0.18.3-darwin-x64.tar.gz"
+      sha256 "d5e8e44fffffbfd8a51c467582a5175d22fd98569afffa9e2e98fbad73a24611"
     end
     on_arm do
-      url "https://github.com/libredb/libredb-studio/releases/download/0.18.2/libredb-studio-standalone-0.18.2-darwin-arm64.tar.gz"
-      sha256 "1de7a3d6ba1e0d4b15e33cc76b2c9696d284947ec49109c115c804c107aa6b7d"
+      url "https://github.com/libredb/libredb-studio/releases/download/0.18.3/libredb-studio-standalone-0.18.3-darwin-arm64.tar.gz"
+      sha256 "96f471097c0626e41c0bd9d23e728621c51fc2a995cda1965f2271bc8b513525"
     end
   end
 
   on_linux do
     on_intel do
-      url "https://github.com/libredb/libredb-studio/releases/download/0.18.2/libredb-studio-standalone-0.18.2-linux-x64.tar.gz"
-      sha256 "b3a43ea18c940458832b7355353fae192c776ca920be6154dd0e3d6ce5dbb85f"
+      url "https://github.com/libredb/libredb-studio/releases/download/0.18.3/libredb-studio-standalone-0.18.3-linux-x64.tar.gz"
+      sha256 "15656d7753e53ce8e324b77339b590040de61e710e9953e19bebd800b7f7c8dd"
     end
     on_arm do
-      url "https://github.com/libredb/libredb-studio/releases/download/0.18.2/libredb-studio-standalone-0.18.2-linux-arm64.tar.gz"
-      sha256 "bb0b2607a52fbb3de04a3d036ee578a2f07ca55b5eeee6decc817cc9eb44845a"
+      url "https://github.com/libredb/libredb-studio/releases/download/0.18.3/libredb-studio-standalone-0.18.3-linux-arm64.tar.gz"
+      sha256 "f4685bf96b40f81a895975bf6b64c78d68d0ca996f0ad3b57733ee07a3176e96"
     end
   end
 
